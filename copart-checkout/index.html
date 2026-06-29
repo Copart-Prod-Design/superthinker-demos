@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete purchase · Lot 48291734 · Copart</title>
+
+<!-- Vallejo Design System — pulled live from the repo via jsDelivr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Copart-Prod-Design/Vallejo@main/dist/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Copart-Prod-Design/Vallejo@main/dist/vallejo.css">
+
+<style>
+  /* Layout-only styles — every color / radius / space / font resolves to a Vallejo var(--token). No new values. */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 24px;
+    color: var(--text-primary); background: var(--surface-canvas); -webkit-font-smoothing: antialiased; }
+  a { color: var(--text-link); text-decoration: none; }
+  a:hover { color: var(--text-link-hover); text-decoration: underline; }
+
+  /* ---- topbar ---- */
+  .topbar { background: var(--surface-header-bg); color: var(--text-on-header); }
+  .topbar-inner { max-width: 1120px; margin: 0 auto; padding: var(--space-3) var(--space-6);
+    display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: var(--space-2); font-weight: 700; font-size: 18px; letter-spacing: 0.4px; }
+  .brand .mark { width: 28px; height: 28px; border-radius: var(--radius-md);
+    background: var(--interactive-primary); display: grid; place-items: center;
+    color: var(--text-inverse); font-weight: 700; font-size: 15px; }
+  .secure { display: flex; align-items: center; gap: var(--space-1-5);
+    font-size: 13px; color: var(--text-on-header-muted); }
+  .secure svg { width: 14px; height: 14px; }
+
+  .crumbs { max-width: 1120px; margin: 0 auto; padding: var(--space-4) var(--space-6) 0;
+    font-size: 13px; color: var(--text-tertiary); }
+  .crumbs strong { color: var(--text-primary); font-weight: 500; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: var(--space-6) var(--space-6) var(--space-16);
+    display: grid; grid-template-columns: 1fr 400px; gap: var(--space-10); align-items: start; }
+  @media (max-width: 880px) {
+    .wrap { grid-template-columns: 1fr; gap: 0; padding: 0 0 var(--space-12); }
+    .summary-col { order: -1; border-bottom: 1px solid var(--border-hairline); }
+    .form-col { padding: var(--space-6); }
+  }
+
+  /* ---- deadline ---- */
+  .deadline { background: var(--interactive-selected-wash); border: 1px solid var(--blue-200);
+    border-radius: var(--radius-lg); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-6);
+    display: flex; align-items: center; gap: var(--space-2-5, 10px); font-size: 14px; color: var(--blue-800); }
+  .deadline svg { width: 16px; height: 16px; flex: none; color: var(--blue-700); }
+  .deadline .clock { font-family: var(--font-mono); font-weight: 500; }
+
+  /* ---- express row ---- */
+  .express { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-2); }
+  .divider { display: flex; align-items: center; gap: var(--space-3); color: var(--text-tertiary);
+    font-size: 12px; margin: var(--space-5) 0 var(--space-6); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border-hairline); }
+
+  /* ---- step blocks ---- */
+  section.step { margin-bottom: var(--space-8); }
+  .step-head { display: flex; align-items: center; gap: var(--space-2-5, 10px); margin-bottom: var(--space-4); }
+  .step-n { display: inline-grid; place-items: center; width: 24px; height: 24px;
+    border-radius: var(--radius-pill); background: var(--gray-900); color: var(--text-inverse);
+    font-size: 13px; font-weight: 600; flex: none; }
+  .step-head h2 { font-size: 18px; font-weight: 600; color: var(--text-primary); margin: 0;
+    line-height: 24px; letter-spacing: -0.1px; }
+  .step-sub { margin: -10px 0 var(--space-4) 36px; font-size: 13px; color: var(--text-tertiary); }
+  .step-body { margin-left: 36px; }
+  @media (max-width: 880px) { .step-body, .step-sub { margin-left: 0; } }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .grid-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-3); }
+  @media (max-width: 560px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ---- payment method tiles ---- */
+  .pay-tiles { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .pay-tile { display: flex; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-4); border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg); background: var(--surface-raised); cursor: pointer;
+    transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease; }
+  .pay-tile:hover { border-color: var(--border-strong); }
+  .pay-tile.is-active { border-color: var(--interactive-primary);
+    background: var(--interactive-selected-wash); box-shadow: 0 0 0 3px var(--shadow-primary-ambient); }
+  .pay-tile .radio-mark { width: 18px; height: 18px; border: 1.5px solid var(--border-control);
+    border-radius: var(--radius-pill); flex: none; position: relative; transition: border-color 120ms ease; }
+  .pay-tile.is-active .radio-mark { border-color: var(--interactive-primary); }
+  .pay-tile.is-active .radio-mark::after { content: ""; position: absolute; inset: 3px;
+    border-radius: var(--radius-pill); background: var(--interactive-primary); }
+  .pay-tile .pay-name { font-weight: 500; font-size: 15px; color: var(--text-primary); line-height: 20px; }
+  .pay-tile .pay-meta { font-size: 13px; color: var(--text-tertiary); line-height: 18px; margin-top: 2px; }
+  .pay-tile .pay-fee { margin-left: auto; font-size: 13px; font-weight: 500; }
+  .pay-tile .pay-fee.no-fee { color: var(--success-600); }
+  .pay-tile .pay-fee.has-fee { color: var(--text-tertiary); font-family: var(--font-mono); }
+
+  .card-fields { display: none; padding-top: var(--space-2); }
+  .card-fields.is-open { display: block; }
+
+  /* ---- summary panel ---- */
+  .summary-col { position: sticky; top: var(--space-6); }
+  @media (max-width: 880px) { .summary-col { position: static; } }
+  .summary { background: var(--surface-raised); border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-xl); overflow: hidden;
+    box-shadow: 0 1px 2px var(--shadow-key-edge), 0 4px 12px var(--shadow-overlay-ambient); }
+  @media (max-width: 880px) {
+    .summary { border-radius: 0; border-left: none; border-right: none; box-shadow: none; }
+  }
+
+  .lot { display: flex; gap: var(--space-3); padding: var(--space-4); border-bottom: 1px solid var(--border-hairline); }
+  .lot-img { width: 96px; height: 72px; border-radius: var(--radius-md); flex: none;
+    background: linear-gradient(135deg, var(--gray-300), var(--gray-500));
+    position: relative; overflow: hidden; }
+  .lot-img .lot-num { position: absolute; left: var(--space-1-5); top: var(--space-1-5);
+    background: var(--gray-900); color: var(--text-inverse);
+    font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+    padding: 2px 6px; border-radius: var(--radius-sm); letter-spacing: 0.3px; }
+  .lot-info { min-width: 0; flex: 1; }
+  .lot-info h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 20px; color: var(--text-primary); }
+  .lot-info .vin { font-family: var(--font-mono); font-weight: 500; font-size: 12px;
+    color: var(--text-tertiary); margin-top: 2px; }
+  .lot-meta { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }
+
+  .promo { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-hairline);
+    display: flex; gap: var(--space-2); }
+  .promo .input { flex: 1; }
+
+  .lines { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-hairline); }
+  .line { display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 14px; color: var(--text-tertiary); padding: var(--space-1-5) 0; }
+  .line .label-hint { display: block; font-size: 12px; color: var(--text-disabled); margin-top: 2px; font-weight: 400; }
+  .line .v { font-family: var(--font-mono); font-weight: 500; color: var(--text-primary); font-size: 14px; }
+  .line.is-discount .v { color: var(--success-600); }
+
+  .total { padding: var(--space-4); display: flex; justify-content: space-between; align-items: baseline; }
+  .total .lbl { font-weight: 600; font-size: 16px; color: var(--text-primary); }
+  .total .cur { font-size: 12px; color: var(--text-tertiary); font-weight: 500; margin-left: var(--space-1); }
+  .total .v { font-family: var(--font-mono); font-weight: 600; font-size: 24px; color: var(--text-primary); }
+
+  .trust { padding: 0 var(--space-4) var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); }
+  .trust-item { display: flex; align-items: center; gap: var(--space-2);
+    font-size: 13px; color: var(--text-tertiary); line-height: 18px; }
+  .trust-item svg { width: 16px; height: 16px; flex: none; color: var(--success-600); }
+
+  /* ---- terms + pay ---- */
+  .terms { margin: var(--space-4) 0; }
+  .terms-text { font-size: 14px; line-height: 20px; color: var(--text-secondary); }
+  .pay-btn { width: 100%; }
+  .pay-note { text-align: center; font-size: 12px; color: var(--text-tertiary);
+    margin-top: var(--space-3); line-height: 18px; }
+
+  /* ---- success ---- */
+  .done { position: fixed; inset: 0; background: rgba(13, 22, 27, 0.55);
+    display: none; place-items: center; z-index: 50; backdrop-filter: blur(2px); }
+  .done.is-open { display: grid; }
+  .done-card { background: var(--surface-raised); border-radius: var(--radius-2xl);
+    max-width: 400px; width: 90%; padding: var(--space-8) var(--space-6); text-align: center;
+    box-shadow: 0 20px 60px var(--shadow-modal-ambient); }
+  .done-check { width: 64px; height: 64px; border-radius: var(--radius-pill);
+    background: var(--success-50); display: grid; place-items: center; margin: 0 auto var(--space-4); }
+  .done-check svg { width: 32px; height: 32px; color: var(--success-600); }
+  .done-card h3 { margin: 0 0 var(--space-2); font-size: 20px; font-weight: 600; color: var(--text-primary); }
+  .done-card p { margin: 0 0 var(--space-1); font-size: 14px; color: var(--text-tertiary); line-height: 20px; }
+  .done-card .conf { font-family: var(--font-mono); font-weight: 500; color: var(--text-primary); }
+  .done-card .receipt { margin-top: var(--space-2); font-size: 13px; color: var(--text-tertiary); }
+  .done-card .btn { width: 100%; margin-top: var(--space-5); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="mark">C</span> COPART</div>
+    <div class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Secure checkout · 256-bit encrypted
+    </div>
+  </div>
+</header>
+
+<div class="crumbs">Auctions › Won lots › <strong>Complete purchase</strong></div>
+
+<div class="wrap">
+
+  <!-- ============ LEFT: FORM ============ -->
+  <div class="form-col">
+
+    <div class="deadline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Payment due to avoid late fees: <span class="clock">2 days, 4 hrs</span> &nbsp;·&nbsp; Wed, Jun 24, 11:59 PM PT
+    </div>
+
+    <div class="express">
+      <button class="btn btn-secondary btn-md" type="button">Pay by wire</button>
+      <button class="btn btn-secondary btn-md" type="button">Use saved card · 4471</button>
+    </div>
+    <div class="divider">or enter details</div>
+
+    <!-- 1 — Member -->
+    <section class="step">
+      <div class="step-head">
+        <span class="step-n">1</span>
+        <h2>Member account</h2>
+      </div>
+      <p class="step-sub">Signed in as <strong>Mast Auto Group LLC</strong> · Member #4827193</p>
+      <div class="step-body">
+        <div class="grid-2">
+          <div class="field">
+            <label class="field-label" for="m-email">Contact email</label>
+            <input id="m-email" class="input input-lg" type="email" value="ops@mastautogroup.com">
+          </div>
+          <div class="field">
+            <label class="field-label" for="m-phone">Phone <span class="field-optional">(pickup coordination)</span></label>
+            <input id="m-phone" class="input input-lg" type="tel" value="(469) 555-0142">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 — Payment method -->
+    <section class="step">
+      <div class="step-head">
+        <span class="step-n">2</span>
+        <h2>Payment method</h2>
+      </div>
+      <p class="step-sub">Lots over $20,000 typically clear fastest by wire.</p>
+      <div class="step-body">
+        <div class="pay-tiles">
+          <label class="pay-tile is-active" data-pay="wire">
+            <span class="radio-mark"></span>
+            <span>
+              <span class="pay-name">Bank wire transfer</span>
+              <span class="pay-meta">Clears in 1 business day · no processing fee</span>
+            </span>
+            <span class="pay-fee no-fee">No fee</span>
+          </label>
+          <label class="pay-tile" data-pay="card">
+            <span class="radio-mark"></span>
+            <span>
+              <span class="pay-name">Credit or debit card</span>
+              <span class="pay-meta">Instant · 2.5% processing fee applies</span>
+            </span>
+            <span class="pay-fee has-fee">+$246.13</span>
+          </label>
+          <label class="pay-tile" data-pay="ach">
+            <span class="radio-mark"></span>
+            <span>
+              <span class="pay-name">ACH / eCheck</span>
+              <span class="pay-meta">Clears in 2–3 business days · no fee</span>
+            </span>
+            <span class="pay-fee no-fee">No fee</span>
+          </label>
+        </div>
+
+        <div class="card-fields" id="cardFields">
+          <div class="field" style="margin-bottom: var(--space-3);">
+            <label class="field-label" for="cc">Card number</label>
+            <input id="cc" class="input input-lg input-mono" inputmode="numeric" placeholder="1234 1234 1234 1234">
+          </div>
+          <div class="grid-3">
+            <div class="field">
+              <label class="field-label" for="cc-name">Name on card</label>
+              <input id="cc-name" class="input input-lg" placeholder="Full name">
+            </div>
+            <div class="field">
+              <label class="field-label" for="cc-exp">Expiry</label>
+              <input id="cc-exp" class="input input-lg input-mono" placeholder="MM / YY">
+            </div>
+            <div class="field">
+              <label class="field-label" for="cc-cvc">CVC</label>
+              <input id="cc-cvc" class="input input-lg input-mono" placeholder="CVC">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 — Pickup -->
+    <section class="step">
+      <div class="step-head">
+        <span class="step-n">3</span>
+        <h2>Pickup and transport</h2>
+      </div>
+      <div class="step-body">
+        <div class="field" style="margin-bottom: var(--space-3);">
+          <label class="field-label" for="pickup">Pickup location</label>
+          <select id="pickup" class="input input-lg">
+            <option>Copart Dallas, TX · 4849 Olympic Dr — lot is here</option>
+            <option>Arrange Copart-brokered transport</option>
+          </select>
+        </div>
+        <div class="field" style="margin-bottom: var(--space-3);">
+          <label class="field-label" for="contact">Authorized pickup contact</label>
+          <input id="contact" class="input input-lg" value="Marcus Webb (driver)">
+        </div>
+        <label class="checkbox-field">
+          <input class="checkbox" type="checkbox" checked>
+          <span>I understand storage fees of <strong>$25/day</strong> begin 3 business days after payment clears.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Terms + Pay -->
+    <section class="step">
+      <div class="terms">
+        <label class="checkbox-field" style="align-items: flex-start;">
+          <input class="checkbox" type="checkbox" id="terms" style="margin-top: 2px;">
+          <span class="terms-text">I agree to the <a href="#">Member Terms</a>, <a href="#">Buyer Fees schedule</a>, and confirm this lot is sold <strong>AS-IS, where-is</strong> per the <a href="#">condition report</a>.</span>
+        </label>
+      </div>
+      <button class="btn btn-primary btn-xl pay-btn" id="payBtn" disabled>
+        <span id="payLabel">Confirm and pay $10,091.13</span>
+      </button>
+      <p class="pay-note">By confirming, you authorize Copart to charge the total above.<br>Title release begins once payment clears.</p>
+    </section>
+  </div>
+
+  <!-- ============ RIGHT: SUMMARY ============ -->
+  <div class="summary-col">
+    <div class="summary">
+
+      <div class="lot">
+        <div class="lot-img"><span class="lot-num">LOT 48291734</span></div>
+        <div class="lot-info">
+          <h3>2021 Tesla Model 3 Long Range AWD</h3>
+          <div class="vin">VIN · 5YJ3E1EB4MF·····92</div>
+          <div class="lot-meta">
+            <span class="badge badge-success">Clean title</span>
+            <span class="badge badge-neutral">Run and drive</span>
+            <span class="badge badge-warning">Minor front damage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo">
+        <input class="input input-md" placeholder="Promo or fee credit code" id="promo">
+        <button class="btn btn-secondary btn-md" id="applyCode" type="button">Apply</button>
+      </div>
+
+      <div class="lines">
+        <div class="line">
+          <span>Winning bid</span><span class="v">$9,200.00</span>
+        </div>
+        <div class="line">
+          <span>Buyer fee<span class="label-hint">Tiered, on $9,200 bid</span></span>
+          <span class="v">$640.00</span>
+        </div>
+        <div class="line">
+          <span>Virtual bid fee</span><span class="v">$129.00</span>
+        </div>
+        <div class="line">
+          <span>Gate and documentation fee</span><span class="v">$95.00</span>
+        </div>
+        <div class="line" id="procLine" style="display:none">
+          <span>Card processing (2.5%)</span><span class="v" id="procVal">$246.13</span>
+        </div>
+        <div class="line">
+          <span>Sales tax (est. TX 6.25%)</span><span class="v">$27.13</span>
+        </div>
+        <div class="line is-discount" id="discLine" style="display:none">
+          <span>Promo · WELCOME50</span><span class="v" id="discVal">−$50.00</span>
+        </div>
+      </div>
+
+      <div class="total">
+        <span class="lbl">Total due <span class="cur">USD</span></span>
+        <span class="v" id="grand">$10,091.13</span>
+      </div>
+
+      <div class="trust">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Title verified clean by Copart
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Funds held until title is released
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Free storage for 3 business days
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success state -->
+<div class="done" id="done" role="dialog" aria-modal="true" aria-labelledby="done-title">
+  <div class="done-card">
+    <div class="done-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h3 id="done-title">Payment confirmed</h3>
+    <p>Your purchase of Lot 48291734 is complete.</p>
+    <p>Confirmation <span class="conf">#CP-7741-2293</span></p>
+    <p class="receipt">A receipt is on its way to ops@mastautogroup.com. Title release begins once your wire clears.</p>
+    <button class="btn btn-primary btn-lg" onclick="document.getElementById('done').classList.remove('is-open')">View my lots</button>
+  </div>
+</div>
+
+<script>
+  const base = { bid: 9200, buyer: 640, vbf: 129, gate: 95, tax: 27.13 };
+  const procRate = 0.025;
+  let usingCard = false, discount = 0;
+  const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function recompute() {
+    const procBase = base.bid + base.buyer + base.vbf + base.gate;
+    const proc = usingCard ? procBase * procRate : 0;
+    document.getElementById('procLine').style.display = usingCard ? 'flex' : 'none';
+    document.getElementById('procVal').textContent = fmt(proc);
+    let total = base.bid + base.buyer + base.vbf + base.gate + base.tax + proc - discount;
+    document.getElementById('grand').textContent = fmt(total);
+    document.getElementById('payLabel').textContent = 'Confirm and pay ' + fmt(total);
+  }
+
+  document.querySelectorAll('.pay-tile').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.pay-tile').forEach(o => o.classList.remove('is-active'));
+      t.classList.add('is-active');
+      usingCard = t.dataset.pay === 'card';
+      document.getElementById('cardFields').classList.toggle('is-open', usingCard);
+      recompute();
+    });
+  });
+
+  document.getElementById('applyCode').addEventListener('click', () => {
+    const inp = document.getElementById('promo');
+    if (inp.value.trim().toUpperCase() === 'WELCOME50' && discount === 0) {
+      discount = 50;
+      document.getElementById('discLine').style.display = 'flex';
+      inp.value = ''; inp.placeholder = 'WELCOME50 applied';
+      inp.setAttribute('aria-invalid', 'false');
+      recompute();
+    } else if (discount === 0) {
+      inp.value = ''; inp.placeholder = 'Invalid code';
+      inp.setAttribute('aria-invalid', 'true');
+    }
+  });
+
+  document.getElementById('terms').addEventListener('change', e => {
+    document.getElementById('payBtn').disabled = !e.target.checked;
+  });
+
+  document.getElementById('payBtn').addEventListener('click', () => {
+    const btn = document.getElementById('payBtn');
+    if (btn.disabled) return;
+    btn.setAttribute('aria-busy', 'true');
+    document.getElementById('payLabel').textContent = 'Processing payment…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('done').classList.add('is-open');
+      btn.removeAttribute('aria-busy');
+      btn.disabled = false;
+      recompute();
+    }, 1500);
+  });
+
+  recompute();
+</script>
+</body>
+</html>
